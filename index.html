@@ -32,7 +32,7 @@ body {
 
 /* ── CUSTOM CURSOR ── */
 #cursor {
-  position: fixed; top: 0; left: 0; z-index: 9999;
+  position: fixed; top: 0; left: 0; z-index: 999;
   pointer-events: none;
 }
 #cursor-dot {
@@ -524,17 +524,19 @@ footer {
   background: rgba(0,0,0,0.95);
   display: none; align-items: center; justify-content: center;
   backdrop-filter: blur(8px);
+  cursor: auto;
 }
 #modal.open { display: flex; }
 .modal-inner {
   position: relative; width: 90vw; max-width: 900px;
+  cursor: auto;
 }
 .modal-close {
   position: absolute; top: -48px; right: 0;
   font-family: 'Share Tech Mono', monospace;
   font-size: 11px; letter-spacing: 3px;
   color: var(--dim); background: none; border: none;
-  cursor: none; text-transform: uppercase;
+  cursor: pointer; text-transform: uppercase;
   transition: color 0.2s;
 }
 .modal-close:hover { color: #fff; }
@@ -543,6 +545,7 @@ footer {
   font-size: 28px; letter-spacing: 2px;
   margin-bottom: 20px; color: #fff;
 }
+#modal a { cursor: pointer; position: relative; z-index: 1010; }
 
 /* mobile */
 @media (max-width: 768px) {
@@ -913,7 +916,7 @@ const films = [
   { n:'01', title:'THE CREEP TAPES 🪓', meta:'#movie #creep #edit #thesoundofyourfear', tag:'EDIT', desc:'the creep tapes 🪓', tiktok:'7505730746271730962' },
   { n:'02', title:"WHO'S THE DUMMY? 💀", meta:'#movie #horror #classic #deadsilence #dummy #edit', tag:'EDIT', desc:"who's the dummy? 💀", tiktok:'7450449923352448263' },
   { n:'03', title:"DRACULA'S LOVE STORY", meta:"#goodmovie #draculaalovetale #horrorromance #edit", tag:'EDIT', desc:"Dracula's love story", tiktok:'7547393604906405138' },
-  { n:'04', title:'SILVER STATIC', meta:'Clip · 2024', tag:'CLIP', desc:'Pure visual noise as cinematic language.' },
+  { n:'04', title:'REAL TREASURE', meta:'#youtube', tag:'FILM', youtube:'iis1KrWE85s' },
   { n:'05', title:'DEEP CURRENT', meta:'AI Short · 2024', tag:'AI FILM', desc:'Underwater dreamscape, no dialogue needed.' },
   { n:'06', title:'ZERO HOUR', meta:'Edit · 2024', tag:'EDIT', desc:'Countdown to something unnamed.' },
   { n:'07', title:'FRACTURE', meta:'AI Short · 2024', tag:'AI FILM', desc:'Reality splitting at its seams.' },
@@ -1009,32 +1012,50 @@ function initCardCanvas(i, f){
 ═══════════════════════════════════════ */
 function openModal(f){
   document.getElementById('modal-title').textContent = f.title;
-  const embedHTML = f.tiktok ? `
-    <div style="display:flex;flex-direction:column;align-items:center;gap:32px;padding:40px 0">
-      <a href="https://www.tiktok.com/@itsshowtime4u/video/${f.tiktok}"
-         target="_blank"
-         style="display:block;width:100%;max-width:500px;aspect-ratio:9/16;max-height:340px;background:#080808;border:1px solid #222;text-decoration:none;position:relative;overflow:hidden;cursor:pointer"
-         onmouseover="this.style.borderColor='#555'"
-         onmouseout="this.style.borderColor='#222'">
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,255,255,0.04) 0%,transparent 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
-          <div style="font-size:52px;color:rgba(255,255,255,0.15)">▶</div>
-          <p style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#555;text-transform:uppercase;margin:0">Click to watch</p>
-        </div>
-      </a>
-      <a href="https://www.tiktok.com/@itsshowtime4u/video/${f.tiktok}"
-         target="_blank"
-         style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#000;background:#fff;padding:16px 48px;text-decoration:none;display:inline-block"
-         onmouseover="this.style.background='#ccc'"
-         onmouseout="this.style.background='#fff'">
-        ▶ &nbsp; Watch on TikTok
-      </a>
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:#444;margin:0">${f.meta}</p>
-    </div>
-  ` : `
-    <div style="aspect-ratio:16/9;background:#0a0a0a;display:flex;align-items:center;justify-content:center;border:1px solid #1a1a1a">
-      <span style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:#333">COMING SOON</span>
-    </div>
-  `;
+  let embedHTML;
+  if(f.youtube){
+    embedHTML = `
+      <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000;margin-top:8px">
+        <iframe
+          src="https://www.youtube.com/embed/${f.youtube}?autoplay=1&rel=0&modestbranding=1"
+          width="100%" height="100%"
+          style="position:absolute;inset:0;border:none"
+          allow="autoplay;encrypted-media;fullscreen"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:#444;margin-top:16px;text-align:center">${f.meta}</p>
+    `;
+  } else if(f.tiktok){
+    embedHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;gap:32px;padding:40px 0">
+        <a href="https://www.tiktok.com/@itsshowtime4u/video/${f.tiktok}"
+           target="_blank"
+           style="display:block;width:100%;max-width:500px;aspect-ratio:9/16;max-height:340px;background:#080808;border:1px solid #222;text-decoration:none;position:relative;overflow:hidden;cursor:pointer"
+           onmouseover="this.style.borderColor='#555'"
+           onmouseout="this.style.borderColor='#222'">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,255,255,0.04) 0%,transparent 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+            <div style="font-size:52px;color:rgba(255,255,255,0.15)">▶</div>
+            <p style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#555;text-transform:uppercase;margin:0">Click to watch</p>
+          </div>
+        </a>
+        <a href="https://www.tiktok.com/@itsshowtime4u/video/${f.tiktok}"
+           target="_blank"
+           style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#000;background:#fff;padding:16px 48px;text-decoration:none;display:inline-block"
+           onmouseover="this.style.background='#ccc'"
+           onmouseout="this.style.background='#fff'">
+          ▶ &nbsp; Watch on TikTok
+        </a>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:#444;margin:0">${f.meta}</p>
+      </div>
+    `;
+  } else {
+    embedHTML = `
+      <div style="aspect-ratio:16/9;background:#0a0a0a;display:flex;align-items:center;justify-content:center;border:1px solid #1a1a1a">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:#333">COMING SOON</span>
+      </div>
+    `;
+  }
   document.getElementById('modal-body').innerHTML = embedHTML;
   document.getElementById('modal').classList.add('open');
 }
