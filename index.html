@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script async src="https://www.tiktok.com/embed.js"></script>
 <style>
 :root {
   --black: #000000;
@@ -910,9 +911,9 @@ all.forEach(txt=>{
    FILMS DATA + GRID
 ═══════════════════════════════════════ */
 const films = [
-  { n:'01', title:'NEON DESCENT', meta:'AI Short · 2024', tag:'AI FILM', desc:'A cyberpunk descent into a digital underworld.' },
-  { n:'02', title:'GHOST SIGNAL', meta:'Edit · 2024', tag:'EDIT', desc:'Glitched transmission from a forgotten frequency.' },
-  { n:'03', title:'THE LAST FRAME', meta:'AI Short · 2024', tag:'AI FILM', desc:'Final moments of an analog world.' },
+  { n:'01', title:'THE CREEP TAPES 🪓', meta:'#movie #creep #edit #thesoundofyourfear', tag:'EDIT', desc:'the creep tapes 🪓', tiktok:'7505730746271730962' },
+  { n:'02', title:"WHO'S THE DUMMY? 💀", meta:'#movie #horror #classic #deadsilence #dummy #edit', tag:'EDIT', desc:"who's the dummy? 💀", tiktok:'7450449923352448263' },
+  { n:'03', title:"DRACULA'S LOVE STORY", meta:"#goodmovie #draculaalovetale #horrorromance #edit", tag:'EDIT', desc:"Dracula's love story", tiktok:'7547393604906405138' },
   { n:'04', title:'SILVER STATIC', meta:'Clip · 2024', tag:'CLIP', desc:'Pure visual noise as cinematic language.' },
   { n:'05', title:'DEEP CURRENT', meta:'AI Short · 2024', tag:'AI FILM', desc:'Underwater dreamscape, no dialogue needed.' },
   { n:'06', title:'ZERO HOUR', meta:'Edit · 2024', tag:'EDIT', desc:'Countdown to something unnamed.' },
@@ -1009,17 +1010,27 @@ function initCardCanvas(i, f){
 ═══════════════════════════════════════ */
 function openModal(f){
   document.getElementById('modal-title').textContent = f.title;
-  document.getElementById('modal-body').innerHTML = `
-    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:#888;margin-bottom:24px">${f.meta} · ${f.tag}</p>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:17px;color:#aaa;line-height:1.8;margin-bottom:32px">${f.desc}</p>
-    <div style="aspect-ratio:16/9;background:#0a0a0a;display:flex;align-items:center;justify-content:center;border:1px solid #1a1a1a">
-      <span style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:#333">UPLOAD YOUR VIDEO HERE</span>
+  const embedHTML = f.tiktok ? `
+    <div style="display:flex;justify-content:center;margin-top:16px">
+      <blockquote class="tiktok-embed"
+        cite="https://www.tiktok.com/@itsshowtime4u/video/${f.tiktok}"
+        data-video-id="${f.tiktok}"
+        style="max-width:605px;min-width:325px;width:100%">
+        <section></section>
+      </blockquote>
     </div>
-    <p style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:#333;margin-top:16px;text-align:center">
-      Upload MP4 files to replace placeholders with your actual content
-    </p>
+  ` : `
+    <div style="aspect-ratio:16/9;background:#0a0a0a;display:flex;align-items:center;justify-content:center;border:1px solid #1a1a1a">
+      <span style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:#333">COMING SOON</span>
+    </div>
+  `;
+  document.getElementById('modal-body').innerHTML = `
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:#888;margin-bottom:16px">${f.meta} · ${f.tag}</p>
+    ${embedHTML}
   `;
   document.getElementById('modal').classList.add('open');
+  // re-init tiktok embed script
+  if(f.tiktok && window.tiktok) window.tiktok.embed.render();
 }
 document.getElementById('modal-close').addEventListener('click',()=>{
   document.getElementById('modal').classList.remove('open');
