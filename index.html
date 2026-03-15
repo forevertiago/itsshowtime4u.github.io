@@ -49,13 +49,23 @@ nav.scrolled{background:rgba(0,0,0,.6);backdrop-filter:blur(24px) saturate(180%)
 .nav-links .nav-cta:hover{background:var(--accent2);box-shadow:0 0 24px rgba(232,201,122,.35);}
 
 /* HERO */
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8vw;position:relative;overflow:hidden;}
-#hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(232,201,122,.05) 0%,transparent 60%);pointer-events:none;z-index:1;}
-#hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(to bottom,transparent,rgba(0,0,0,.7));pointer-events:none;z-index:3;}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8vw;position:relative;}
+#hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(232,201,122,.05) 0%,transparent 60%);pointer-events:none;}
+#hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(to bottom,transparent,rgba(0,0,0,.7));pointer-events:none;}
 /* HERO SPHERE CANVAS */
-#hero-sphere{position:absolute;top:0;right:-6%;width:62%;height:100%;z-index:0;pointer-events:none;opacity:0;animation:fadeIn 2.4s .6s forwards;}
+#hero-sphere{
+  position:absolute;
+  top:50%;right:0;
+  transform:translateY(-50%);
+  width:clamp(400px,52vw,820px);
+  height:clamp(400px,52vw,820px);
+  pointer-events:none;
+  opacity:0;
+  animation:fadeIn 2s .5s forwards;
+  display:block;
+}
 /* HERO CONTENT WRAPPER */
-.hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;}
+.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;}
 .hero-eyebrow{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:7px;color:var(--accent);text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:16px;opacity:0;animation:fadeUp 1s .2s forwards;}
 .hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--accent);box-shadow:0 0 8px var(--accent);}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,13vw,200px);line-height:.88;letter-spacing:1px;color:#fff;opacity:0;animation:fadeUp 1s .4s forwards;}
@@ -207,7 +217,7 @@ footer{position:relative;z-index:var(--z-app);padding:48px 8vw;border-top:1px so
 @media(max-width:768px){
   nav{padding:18px 5vw;}.nav-links{display:none;}
   section{padding:80px 5vw;}#hero{padding:0 5vw;}
-  #hero-sphere{width:100%;right:0;opacity:.35;}
+  #hero-sphere{width:clamp(300px,90vw,420px);height:clamp(300px,90vw,420px);right:50%;transform:translate(50%,-50%);opacity:.25;}
   .films-grid{grid-template-columns:1fr;}
   #about{grid-template-columns:1fr;gap:40px;}.about-visual{display:none;}
   footer{flex-direction:column;gap:20px;text-align:center;}.footer-links{flex-wrap:wrap;justify-content:center;}
@@ -494,12 +504,19 @@ const films=[
   {n:'01',title:'THE CREEP TAPES 🪓',meta:'#movie #creep #edit #thesoundofyourfear',tag:'EDIT',tiktok:'7505730746271730962'},
   {n:'02',title:"WHO'S THE DUMMY? 💀",meta:'#movie #horror #classic #deadsilence #edit',tag:'EDIT',tiktok:'7450449923352448263'},
   {n:'03',title:"DRACULA'S LOVE STORY",meta:'#goodmovie #draculaalovetale #horrorromance',tag:'EDIT',tiktok:'7547393604906405138'},
-  {n:'04',title:'REAL TREASURE',meta:'#youtube',tag:'FILM',youtube:'iis1KrWE85s'},
-  {n:'05',title:'DEEP CURRENT',meta:'AI Short · 2024',tag:'AI FILM',desc:'Underwater dreamscape, no dialogue needed.'},
-  {n:'06',title:'ZERO HOUR',meta:'Edit · 2024',tag:'EDIT',desc:'Countdown to something unnamed.'},
-  {n:'07',title:'FRACTURE',meta:'AI Short · 2024',tag:'AI FILM',desc:'Reality splitting at its seams.'},
-  {n:'08',title:'THE OPERATOR',meta:'Clip · 2024',tag:'CLIP',desc:'One character. One room. Everything.'},
-  {n:'09',title:'FLUX STATE',meta:'AI Short · 2024',tag:'AI FILM',desc:'Between sleep and waking, anything exists.'},
+  {n:'04',title:"WOULD YOU OPEN THE DOOR? ODDITY",meta:'#horror #oddity #edit',tag:'EDIT',tiktok:'7405280302551010578'},
+  {n:'05',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7603105474698923282'},
+  {n:'06',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7602951290955566344'},
+  {n:'07',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7601129722612927752'},
+  {n:'08',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7600513692022639890'},
+  {n:'09',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7598581351628950792'},
+  {n:'10',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7597881603376958728'},
+  {n:'11',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7595381951981456658'},
+  {n:'12',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7595327437156650258'},
+  {n:'13',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7593448218730450194'},
+  {n:'14',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7592647930100714759'},
+  {n:'15',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7592607040086740232'},
+  {n:'16',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7588192117248380168'},
 ];
 
 const grid=document.getElementById('films-grid');
@@ -630,140 +647,134 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').fo
   const canvas=document.getElementById('hero-sphere');
   if(!canvas)return;
 
-  function cw(){return canvas.offsetWidth||window.innerWidth*.62;}
-  function ch(){return canvas.offsetHeight||window.innerHeight;}
+  // Read CSS-computed size AFTER layout — this is the critical fix.
+  // getBoundingClientRect() is accurate; offsetWidth can be 0 during parse.
+  // We pass false to setSize so Three.js does NOT overwrite the CSS width/height
+  // with inline pixel styles (which would break the clamp() responsive sizing).
+  function initSphere(){
+    const rect=canvas.getBoundingClientRect();
+    const W=rect.width||600;
+    const H=rect.height||600;
 
-  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  renderer.setSize(cw(),ch());
-  renderer.setClearColor(0x000000,0);
+    const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    renderer.setSize(W,H,false); // false = don't touch CSS display size
+    renderer.setClearColor(0x000000,0);
 
-  const scene=new THREE.Scene();
-  scene.fog=new THREE.Fog(0x000000,22,52);
+    const scene=new THREE.Scene();
+    scene.fog=new THREE.Fog(0x000000,24,55);
 
-  const camera=new THREE.PerspectiveCamera(46,cw()/ch(),.1,120);
-  camera.position.set(0,0,20);
+    const camera=new THREE.PerspectiveCamera(44,W/H,.1,120);
+    camera.position.set(0,0,20);
 
-  // ── GEOMETRY ──
-  const group=new THREE.Group();
-  scene.add(group);
+    // ── GROUP ──
+    const group=new THREE.Group();
+    scene.add(group);
 
-  // Core solid sphere
-  const solidMat=new THREE.MeshPhongMaterial({
-    color:0x030303,emissive:0x0e0800,
-    specular:0xe8c97a,shininess:80,
-    transparent:true,opacity:.97,
-  });
-  group.add(new THREE.Mesh(new THREE.SphereGeometry(6.5,64,64),solidMat));
+    // Solid dark sphere with gold specular
+    const solidMat=new THREE.MeshPhongMaterial({
+      color:0x040404,emissive:0x0a0600,
+      specular:0xe8c97a,shininess:90,
+    });
+    group.add(new THREE.Mesh(new THREE.SphereGeometry(6.5,64,64),solidMat));
 
-  // Fine wireframe — many thin gold lines
-  const fineWireMat=new THREE.LineBasicMaterial({
-    color:0xe8c97a,transparent:true,opacity:.07,
-    blending:THREE.AdditiveBlending,depthWrite:false,
-  });
-  group.add(new THREE.LineSegments(
-    new THREE.WireframeGeometry(new THREE.SphereGeometry(6.56,28,28)),
-    fineWireMat
-  ));
+    // Fine wireframe — dense gold lattice
+    const fineWireMat=new THREE.LineBasicMaterial({
+      color:0xe8c97a,transparent:true,opacity:.08,
+      blending:THREE.AdditiveBlending,depthWrite:false,
+    });
+    group.add(new THREE.LineSegments(
+      new THREE.WireframeGeometry(new THREE.SphereGeometry(6.56,28,28)),
+      fineWireMat
+    ));
 
-  // Coarse wireframe — bold structural lines
-  const coarseWireMat=new THREE.LineBasicMaterial({
-    color:0xe8c97a,transparent:true,opacity:.22,
-    blending:THREE.AdditiveBlending,depthWrite:false,
-  });
-  const coarseWire=new THREE.LineSegments(
-    new THREE.WireframeGeometry(new THREE.SphereGeometry(6.59,10,10)),
-    coarseWireMat
-  );
-  group.add(coarseWire);
+    // Coarse wireframe — bold structural grid
+    const coarseWireMat=new THREE.LineBasicMaterial({
+      color:0xe8c97a,transparent:true,opacity:.25,
+      blending:THREE.AdditiveBlending,depthWrite:false,
+    });
+    group.add(new THREE.LineSegments(
+      new THREE.WireframeGeometry(new THREE.SphereGeometry(6.59,10,10)),
+      coarseWireMat
+    ));
 
-  // Inner glow shell
-  group.add(new THREE.Mesh(
-    new THREE.SphereGeometry(6.3,32,32),
-    new THREE.MeshBasicMaterial({color:0xe8c97a,transparent:true,opacity:.055,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.BackSide})
-  ));
+    // Inner glow shell
+    group.add(new THREE.Mesh(new THREE.SphereGeometry(6.3,32,32),
+      new THREE.MeshBasicMaterial({color:0xe8c97a,transparent:true,opacity:.06,
+        blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.BackSide})));
 
-  // Mid glow halo
-  group.add(new THREE.Mesh(
-    new THREE.SphereGeometry(7.5,32,32),
-    new THREE.MeshBasicMaterial({color:0xe8c97a,transparent:true,opacity:.03,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.BackSide})
-  ));
+    // Mid halo
+    group.add(new THREE.Mesh(new THREE.SphereGeometry(7.6,32,32),
+      new THREE.MeshBasicMaterial({color:0xe8c97a,transparent:true,opacity:.035,
+        blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.BackSide})));
 
-  // Outer atmospheric bloom
-  group.add(new THREE.Mesh(
-    new THREE.SphereGeometry(10,16,16),
-    new THREE.MeshBasicMaterial({color:0xc8a020,transparent:true,opacity:.012,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.BackSide})
-  ));
+    // Outer atmospheric bloom
+    group.add(new THREE.Mesh(new THREE.SphereGeometry(10.5,16,16),
+      new THREE.MeshBasicMaterial({color:0xc8a020,transparent:true,opacity:.014,
+        blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.BackSide})));
 
-  // ── LIGHTS ──
-  scene.add(new THREE.AmbientLight(0x111111,1));
+    // ── LIGHTS ──
+    scene.add(new THREE.AmbientLight(0x222222,1));
+    const goldLight=new THREE.PointLight(0xe8c97a,5,35);
+    scene.add(goldLight);
+    const rimLight=new THREE.PointLight(0xffffff,1,30);
+    rimLight.position.set(-10,8,-10);
+    scene.add(rimLight);
+    const fillLight=new THREE.PointLight(0xc88010,.6,25);
+    fillLight.position.set(8,-5,14);
+    scene.add(fillLight);
 
-  // Orbiting gold key light
-  const goldLight=new THREE.PointLight(0xe8c97a,4,30);
-  scene.add(goldLight);
+    // ── MOUSE ──
+    let mnx=0,mny=0,smx=0,smy=0;
+    document.addEventListener('mousemove',e=>{
+      mnx=e.clientX/innerWidth-.5;
+      mny=e.clientY/innerHeight-.5;
+    });
 
-  // White rim from upper-left-back
-  const rimLight=new THREE.PointLight(0xffffff,.9,28);
-  rimLight.position.set(-10,7,-10);
-  scene.add(rimLight);
+    // ── RESIZE ──
+    window.addEventListener('resize',()=>{
+      const r=canvas.getBoundingClientRect();
+      renderer.setSize(r.width,r.height,false);
+      camera.aspect=r.width/r.height;
+      camera.updateProjectionMatrix();
+    });
 
-  // Warm fill front
-  const fillLight=new THREE.PointLight(0xc88010,.5,22);
-  fillLight.position.set(6,-5,14);
-  scene.add(fillLight);
+    // ── ANIMATE ──
+    let t=0;
+    (function animate(){
+      t+=.008;
+      requestAnimationFrame(animate);
+      smx+=(mnx-smx)*.04;
+      smy+=(mny-smy)*.04;
 
-  // ── MOUSE ──
-  let mnx=0,mny=0,smx=0,smy=0;
-  document.addEventListener('mousemove',e=>{
-    mnx=e.clientX/innerWidth-.5;
-    mny=e.clientY/innerHeight-.5;
-  });
+      // Perpetual multi-axis rotation + mouse nudge
+      group.rotation.x+=.003+smy*.004;
+      group.rotation.y+=.005+smx*.004;
+      group.rotation.z+=.0013;
 
-  // ── RESIZE ──
-  window.addEventListener('resize',()=>{
-    renderer.setSize(cw(),ch());
-    camera.aspect=cw()/ch();
-    camera.updateProjectionMatrix();
-  });
+      // Camera parallax — the camera drifts, sphere stays centered
+      camera.position.x+=(smx*5-camera.position.x)*.05;
+      camera.position.y+=(-smy*3.5-camera.position.y)*.05;
+      camera.lookAt(0,0,0);
 
-  // ── ANIMATE ──
-  let t=0;
-  (function animate(){
-    t+=.008;
-    requestAnimationFrame(animate);
+      // Breathing pulse
+      group.scale.setScalar(1+Math.sin(t*1.3)*.024);
 
-    // Smooth mouse
-    smx+=(mnx-smx)*.038;
-    smy+=(mny-smy)*.038;
+      // Orbiting gold key light
+      const la=t*.65;
+      goldLight.position.set(Math.sin(la)*14,Math.cos(la*.7)*9,Math.cos(la)*8+16);
+      goldLight.intensity=4+Math.sin(t*2.1)*1.2;
 
-    // Perpetual multi-axis rotation
-    group.rotation.x+=.0028+smy*.003;
-    group.rotation.y+=.0052+smx*.003;
-    group.rotation.z+=.0012;
+      // Wireframe shimmer
+      fineWireMat.opacity=.07+Math.sin(t*1.8)*.04;
+      coarseWireMat.opacity=.2+Math.sin(t*1.1+.8)*.1;
 
-    // Camera parallax tilt (mouse moves camera, not object, for true parallax feel)
-    camera.position.x+=(smx*4-camera.position.x)*.045;
-    camera.position.y+=(-smy*3-camera.position.y)*.045;
-    camera.lookAt(0,0,0);
+      renderer.render(scene,camera);
+    })();
+  }
 
-    // Pulsing scale — breathes like a living thing
-    group.scale.setScalar(1+Math.sin(t*1.25)*.022);
-
-    // Orbiting gold light arc
-    const la=t*.65;
-    goldLight.position.set(
-      Math.sin(la)*13,
-      Math.cos(la*.7)*9,
-      Math.cos(la)*7+15
-    );
-    goldLight.intensity=3.2+Math.sin(t*2.2)*.9;
-
-    // Wireframe shimmer
-    fineWireMat.opacity=.06+Math.sin(t*1.7)*.035;
-    coarseWireMat.opacity=.18+Math.sin(t*1.1+.8)*.09;
-
-    renderer.render(scene,camera);
-  })();
+  // Defer to next frame so CSS layout is fully computed
+  requestAnimationFrame(initSphere);
 })();
 </script>
 </body>
