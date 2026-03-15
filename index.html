@@ -64,6 +64,9 @@ nav.scrolled{background:rgba(0,0,0,.6);backdrop-filter:blur(24px) saturate(180%)
   opacity:0;
   animation:fadeIn 2.5s .8s forwards;
   display:block;
+  background:transparent;
+  border:none;
+  box-shadow:none;
 }
 .hero-eyebrow{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:7px;color:var(--accent);text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:16px;opacity:0;animation:fadeUp 1s .2s forwards;}
 .hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--accent);box-shadow:0 0 8px var(--accent);}
@@ -194,6 +197,16 @@ footer{position:relative;z-index:var(--z-app);padding:48px 8vw;border-top:1px so
 .modal-close:hover{color:var(--accent);}
 .modal-title{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;margin-bottom:20px;color:#fff;}
 
+/* CONTACT MODAL */
+#contact-modal{position:fixed;inset:0;z-index:var(--z-modal);background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);cursor:auto;}
+#contact-modal.open{display:flex;}
+.contact-form{display:flex;flex-direction:column;gap:14px;}
+.contact-form input,.contact-form textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#fff;font-family:'Cormorant Garamond',serif;font-size:16px;padding:14px 16px;outline:none;transition:border-color .2s;resize:none;}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--dim);}
+.contact-form input:focus,.contact-form textarea:focus{border-color:rgba(232,201,122,.4);}
+.contact-form textarea{min-height:120px;}
+.contact-form .btn-primary{cursor:pointer;width:100%;border:none;}
+
 /* REVEAL SYSTEM */
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -241,7 +254,6 @@ footer{position:relative;z-index:var(--z-app);padding:48px 8vw;border-top:1px so
     <li><a href="#films">Films</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#collab">Collab</a></li>
-    <li><a href="https://www.youtube.com/@itsshowtime4u" target="_blank">YouTube</a></li>
     <li><a href="https://www.tiktok.com/@itsshowtime4u" target="_blank" class="nav-cta">TikTok</a></li>
   </ul>
 </nav>
@@ -287,7 +299,6 @@ footer{position:relative;z-index:var(--z-app);padding:48px 8vw;border-top:1px so
     <p>From short film edits to full AI-generated movie sequences, every frame is crafted with intention. <strong>9.6 million likes</strong> and counting — independent cinema for the streaming age.</p>
     <div class="about-links">
       <a href="https://www.tiktok.com/@itsshowtime4u" target="_blank" class="btn-primary">TikTok</a>
-      <a href="https://www.youtube.com/@itsshowtime4u" target="_blank" class="btn-secondary">YouTube</a>
     </div>
   </div>
   <div class="about-visual reveal-right"><canvas id="about-canvas"></canvas></div>
@@ -307,7 +318,7 @@ footer{position:relative;z-index:var(--z-app);padding:48px 8vw;border-top:1px so
   <div class="collab-inner">
     <p class="section-label reveal">Work With Us</p>
     <h2 class="section-title reveal">COLLAB &amp;<br>CONTACT</h2>
-    <p class="collab-sub reveal">Brand partnerships, sync licensing, sponsored edits, AI content production. Based in Lisbon. Distributed globally.</p>
+    <p class="collab-sub reveal">Brand partnerships, sync licensing, sponsored edits, AI content production. Worldwide · Remote.</p>
     <div class="collab-grid">
       <div class="collab-card reveal" style="transition-delay:0s">
         <div class="collab-card-icon">
@@ -332,7 +343,7 @@ footer{position:relative;z-index:var(--z-app);padding:48px 8vw;border-top:1px so
       </div>
     </div>
     <div class="collab-cta reveal">
-      <a href="mailto:forevertiago@gmail.com" class="btn-primary">Get In Touch</a>
+      <button class="btn-primary" id="contact-btn">Get In Touch</button>
       <a href="https://www.tiktok.com/@itsshowtime4u" target="_blank" class="btn-secondary">@itsshowtime4u</a>
     </div>
   </div>
@@ -343,7 +354,6 @@ footer{position:relative;z-index:var(--z-app);padding:48px 8vw;border-top:1px so
   <div class="footer-links">
     <a href="#films">Films</a><a href="#about">About</a><a href="#collab">Collab</a>
     <a href="https://www.tiktok.com/@itsshowtime4u" target="_blank">TikTok</a>
-    <a href="https://www.youtube.com/@itsshowtime4u" target="_blank">YouTube</a>
   </div>
   <div class="footer-copy">© 2025 · @itsshowtime4u</div>
 </footer>
@@ -355,6 +365,19 @@ footer{position:relative;z-index:var(--z-app);padding:48px 8vw;border-top:1px so
     <button class="modal-close" id="modal-close">Close</button>
     <div class="modal-title" id="modal-title"></div>
     <div id="modal-body"></div>
+  </div>
+</div>
+
+<div id="contact-modal">
+  <div class="modal-inner" style="max-width:520px">
+    <button class="modal-close" id="contact-modal-close">Close</button>
+    <div class="modal-title">GET IN TOUCH</div>
+    <form class="contact-form" action="https://formspree.io/f/xgonlolj" method="POST">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <textarea name="message" placeholder="Message" required></textarea>
+      <button type="submit" class="btn-primary">Send Message</button>
+    </form>
   </div>
 </div>
 
@@ -521,11 +544,8 @@ films.forEach((f,i)=>{
   const card=document.createElement('div');
   card.className='card reveal';
   card.style.transitionDelay=(i%3)*.1+'s';
-  const thumbUrl=f.youtube
-    ?`https://img.youtube.com/vi/${f.youtube}/maxresdefault.jpg`
-    :`https://www.tiktok.com/api/img/?itemId=${f.tiktok}&location=0`;
   card.innerHTML=`
-    <div class="card-bg" style="background-image:url('${thumbUrl}');background-size:cover;background-position:center;"></div>
+    <div class="card-bg" style="background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 100%);"></div>
     <div class="card-inner">
       <div class="card-number">${f.n}</div>
       <div class="card-title">${f.title}</div>
@@ -555,9 +575,7 @@ films.forEach((f,i)=>{
 function openModal(f){
   document.getElementById('modal-title').textContent=f.title;
   let html;
-  if(f.youtube){
-    html=`<div style="position:relative;width:100%;aspect-ratio:16/9;background:#000"><iframe src="https://www.youtube.com/embed/${f.youtube}?autoplay=1&rel=0" width="100%" height="100%" style="position:absolute;inset:0;border:none" allow="autoplay;encrypted-media;fullscreen" allowfullscreen></iframe></div>`;
-  } else if(f.tiktok){
+  if(f.tiktok){
     html=`<div style="display:flex;flex-direction:column;align-items:center;gap:28px;padding:36px 0">
       <a href="https://www.tiktok.com/@itsshowtime4u/video/${f.tiktok}" target="_blank" style="display:flex;align-items:center;justify-content:center;width:100%;max-width:460px;aspect-ratio:9/16;max-height:320px;background:rgba(255,255,255,.03);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.08);text-decoration:none;flex-direction:column;gap:12px;transition:border-color .3s" onmouseover="this.style.borderColor='rgba(232,201,122,.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
         <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(232,201,122,0.4)" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -566,14 +584,17 @@ function openModal(f){
       <a href="https://www.tiktok.com/@itsshowtime4u/video/${f.tiktok}" target="_blank" style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#000;background:#e8c97a;padding:16px 48px;text-decoration:none;transition:background .2s,box-shadow .2s" onmouseover="this.style.background='#c8a84a';this.style.boxShadow='0 0 24px rgba(232,201,122,.35)'" onmouseout="this.style.background='#e8c97a';this.style.boxShadow='none'">Watch on TikTok</a>
     </div>`;
   } else {
-    html=`<div style="aspect-ratio:16/9;background:rgba(255,255,255,.02);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.06)"><span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#222">COMING SOON</span></div>`;
+    html=`<div style="aspect-ratio:16/9;background:rgba(255,255,255,.02);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.06)"><span style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#222">COMING SOON</span></div>`;
   }
   document.getElementById('modal-body').innerHTML=html;
   document.getElementById('modal').classList.add('open');
 }
 document.getElementById('modal-close').addEventListener('click',()=>document.getElementById('modal').classList.remove('open'));
 document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))document.getElementById('modal').classList.remove('open');});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('modal').classList.remove('open');});
+document.getElementById('contact-btn').addEventListener('click',()=>document.getElementById('contact-modal').classList.add('open'));
+document.getElementById('contact-modal-close').addEventListener('click',()=>document.getElementById('contact-modal').classList.remove('open'));
+document.getElementById('contact-modal').addEventListener('click',e=>{if(e.target===document.getElementById('contact-modal'))document.getElementById('contact-modal').classList.remove('open');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('modal').classList.remove('open');document.getElementById('contact-modal').classList.remove('open');}});
 
 // ── SCROLL REVEALS ──
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{
