@@ -113,7 +113,7 @@ section{position:relative;z-index:var(--z-app);padding:120px 8vw;}
 .films-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
 .card{position:relative;aspect-ratio:16/9;overflow:hidden;cursor:none;background:#080808;transition:box-shadow .5s cubic-bezier(.23,1,.32,1);will-change:transform;}
 .card:hover{z-index:2;box-shadow:0 24px 64px rgba(0,0,0,.9),0 0 40px rgba(232,201,122,.08);}
-.card-bg{position:absolute;inset:0;background:#070707;}
+.card-bg{position:absolute;inset:0;background:#070707;background-size:cover;background-position:center;}
 .card-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,201,122,.05) 0%,transparent 50%);opacity:0;transition:opacity .5s;}
 .card:hover .card-bg::after{opacity:1;}
 .card-visual{position:absolute;inset:0;width:100%!important;height:100%!important;}
@@ -527,22 +527,22 @@ const ticker=document.getElementById('ticker');
 
 // ── FILMS ──
 const films=[
-  {n:'01',title:'THE CREEP TAPES 🪓',meta:'#movie #creep #edit #thesoundofyourfear',tag:'EDIT',tiktok:'7505730746271730962',thumb:'https://source.unsplash.com/600x338/?horror,dark,cinema'},
-  {n:'02',title:"WHO'S THE DUMMY? 💀",meta:'#movie #horror #classic #deadsilence #edit',tag:'EDIT',tiktok:'7450449923352448263',thumb:'https://source.unsplash.com/600x338/?horror,puppet,scary'},
-  {n:'03',title:"DRACULA'S LOVE STORY",meta:'#goodmovie #draculaalovetale #horrorromance',tag:'EDIT',tiktok:'7547393604906405138',thumb:'https://source.unsplash.com/600x338/?vampire,dark,gothic'},
-  {n:'04',title:"WOULD YOU OPEN THE DOOR? ODDITY",meta:'#horror #oddity #edit',tag:'EDIT',tiktok:'7405280302551010578',thumb:'https://source.unsplash.com/600x338/?mystery,door,horror'},
-  {n:'05',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7603105474698923282',thumb:'https://source.unsplash.com/600x338/?apocalypse,wasteland,fallout&sig=5'},
-  {n:'06',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7602951290955566344',thumb:'https://source.unsplash.com/600x338/?apocalypse,wasteland,fallout&sig=6'},
-  {n:'07',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7601129722612927752',thumb:'https://source.unsplash.com/600x338/?apocalypse,wasteland,fallout&sig=7'},
-  {n:'08',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7600513692022639890',thumb:'https://source.unsplash.com/600x338/?apocalypse,wasteland,fallout&sig=8'},
-  {n:'09',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7598581351628950792',thumb:'https://source.unsplash.com/600x338/?apocalypse,wasteland,fallout&sig=9'},
-  {n:'10',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7597881603376958728',thumb:'https://source.unsplash.com/600x338/?apocalypse,wasteland,fallout&sig=10'},
-  {n:'11',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7595381951981456658',thumb:'https://source.unsplash.com/600x338/?apocalypse,wasteland,fallout&sig=11'},
-  {n:'12',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7595327437156650258',thumb:'https://source.unsplash.com/600x338/?apocalypse,wasteland,fallout&sig=12'},
-  {n:'13',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7593448218730450194',thumb:'https://source.unsplash.com/600x338/?apocalypse,wasteland,fallout&sig=13'},
-  {n:'14',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7592647930100714759',thumb:'https://source.unsplash.com/600x338/?apocalypse,wasteland,fallout&sig=14'},
-  {n:'15',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7592607040086740232',thumb:'https://source.unsplash.com/600x338/?apocalypse,wasteland,fallout&sig=15'},
-  {n:'16',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7588192117248380168',thumb:'https://source.unsplash.com/600x338/?apocalypse,wasteland,fallout&sig=16'},
+  {n:'01',title:'THE CREEP TAPES 🪓',meta:'#movie #creep #edit #thesoundofyourfear',tag:'EDIT',tiktok:'7505730746271730962',bg:'https://source.unsplash.com/600x338/?horror,creep,cinema'},
+  {n:'02',title:"WHO'S THE DUMMY? 💀",meta:'#movie #horror #classic #deadsilence #edit',tag:'EDIT',tiktok:'7450449923352448263',bg:'https://source.unsplash.com/600x338/?horror,puppet,dummy'},
+  {n:'03',title:"DRACULA'S LOVE STORY",meta:'#goodmovie #draculaalovetale #horrorromance',tag:'EDIT',tiktok:'7547393604906405138',bg:'https://source.unsplash.com/600x338/?vampire,gothic,dark'},
+  {n:'04',title:"WOULD YOU OPEN THE DOOR? ODDITY",meta:'#horror #oddity #edit',tag:'EDIT',tiktok:'7405280302551010578',bg:'https://source.unsplash.com/600x338/?mystery,door,horror'},
+  {n:'05',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7603105474698923282',bg:'https://source.unsplash.com/600x338/?apocalypse,wasteland,ruins&sig=5'},
+  {n:'06',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7602951290955566344',bg:'https://source.unsplash.com/600x338/?apocalypse,wasteland,ruins&sig=6'},
+  {n:'07',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7601129722612927752',bg:'https://source.unsplash.com/600x338/?apocalypse,wasteland,ruins&sig=7'},
+  {n:'08',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7600513692022639890',bg:'https://source.unsplash.com/600x338/?apocalypse,wasteland,ruins&sig=8'},
+  {n:'09',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7598581351628950792',bg:'https://source.unsplash.com/600x338/?apocalypse,wasteland,ruins&sig=9'},
+  {n:'10',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7597881603376958728',bg:'https://source.unsplash.com/600x338/?apocalypse,wasteland,ruins&sig=10'},
+  {n:'11',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7595381951981456658',bg:'https://source.unsplash.com/600x338/?apocalypse,wasteland,ruins&sig=11'},
+  {n:'12',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7595327437156650258',bg:'https://source.unsplash.com/600x338/?apocalypse,wasteland,ruins&sig=12'},
+  {n:'13',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7593448218730450194',bg:'https://source.unsplash.com/600x338/?apocalypse,wasteland,ruins&sig=13'},
+  {n:'14',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7592647930100714759',bg:'https://source.unsplash.com/600x338/?apocalypse,wasteland,ruins&sig=14'},
+  {n:'15',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7592607040086740232',bg:'https://source.unsplash.com/600x338/?apocalypse,wasteland,ruins&sig=15'},
+  {n:'16',title:'FALLOUT',meta:'#fallout #edit',tag:'EDIT',tiktok:'7588192117248380168',bg:'https://source.unsplash.com/600x338/?apocalypse,wasteland,ruins&sig=16'},
 ];
 
 const grid=document.getElementById('films-grid');
@@ -551,7 +551,7 @@ films.forEach((f,i)=>{
   card.className='card reveal';
   card.style.transitionDelay=(i%3)*.1+'s';
   card.innerHTML=`
-    <div class="card-bg" style="background-image:url('${f.thumb}');background-size:cover;background-position:center;"></div>
+    <div class="card-bg" style="background-image:url('${f.bg}');background-size:cover;background-position:center;"></div>
     <div class="card-inner">
       <div class="card-number">${f.n}</div>
       <div class="card-title">${f.title}</div>
@@ -634,6 +634,8 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').fo
     renderer.setPixelRatio(Math.min(devicePixelRatio,2));
     renderer.setSize(W,H,false);
     renderer.setClearColor(0x000000,0);
+    // Force canvas to stay transparent — Three.js can override element styles
+    canvas.style.cssText+='background:transparent!important;background-color:transparent!important;border:none!important;outline:none!important;box-shadow:none!important;';
 
     const scene=new THREE.Scene();
     const camera=new THREE.PerspectiveCamera(44,W/H,.1,120);
